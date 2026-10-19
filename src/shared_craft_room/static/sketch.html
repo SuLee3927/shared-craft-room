@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN"><head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>共同画画本</title><link rel="stylesheet" href="../assets/sketch.css?v=6"><link rel="stylesheet" href="../assets/sketch-mobile.css?v=7"><link rel="stylesheet" href="../assets/craft-room.css?v=1">
+</head><body class="sketch-room">
+  <main class="sketchbook">
+    <header><div><p class="eyebrow">SHARED SKETCHBOOK</p><h1>共同画画本</h1><p id="status">正在铺开画纸……</p></div><a class="gallery-link" href="../crafts/">‹ 回手作间</a></header>
+    <section class="paper-wrap">
+      <div class="spiral" aria-hidden="true"></div>
+      <canvas id="canvas" width="1200" height="800" aria-label="共同画布"></canvas>
+    </section>
+    <div id="presence" class="presence">等待对方进入画本……</div>
+    <nav class="toolbar" aria-label="画画工具">
+      <button id="toolbar-toggle" class="toolbar-toggle" type="button" aria-expanded="false" aria-label="展开画画工具">✎</button>
+      <div class="toolbar-content">
+      <div class="paper-actions">
+        <button id="undo" class="action-icon" type="button" aria-label="撤销我的一笔"><svg viewBox="0 0 24 24"><path d="M9 7 4 12l5 5M5 12h8a6 6 0 0 1 6 6"/></svg></button>
+        <button id="download" class="action-icon" type="button" aria-label="保存图片"><svg viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 19h14"/></svg></button>
+        <button id="exhibit" class="action-icon" type="button" aria-label="收入共同作品展"><svg viewBox="0 0 24 24"><path d="M4 20h16M6 20V8h12v12M9 8V4h6v4M9 12h6v5H9z"/></svg></button>
+        <button id="clear" class="action-icon danger" type="button" aria-label="换张白纸"><svg viewBox="0 0 24 24"><path d="M5 7h14M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5"/></svg></button>
+      </div>
+      <div class="tool-dock">
+        <div class="brushes" aria-label="笔型">
+          <button class="brush active" data-brush="pen" type="button" aria-label="签字笔"><svg viewBox="0 0 28 52"><path class="pen-body" d="M9 5c0-3 10-3 10 0v30l-5 12-5-12Z"/><path d="M9 10h10M9 35h10M14 36v9"/></svg></button>
+          <button class="brush" data-brush="pencil" type="button" aria-label="铅笔"><svg viewBox="0 0 28 52"><path class="pen-body" d="m8 8 6-5 6 5v31l-6 10-6-10Z"/><path d="M8 12h12M8 38h12M11 6h6"/></svg></button>
+          <button class="brush" data-brush="marker" type="button" aria-label="马克笔"><svg viewBox="0 0 28 52"><path class="pen-body" d="M7 7c0-4 14-4 14 0v31l-4 10h-6L7 38Z"/><path d="M7 13h14M8 36h12M11 47h6"/></svg></button>
+          <button class="brush" data-brush="brush" type="button" aria-label="软笔刷"><svg viewBox="0 0 28 52"><path class="pen-body" d="M10 3h8l2 27-6 18-6-18Z"/><path d="M9 13h10M8 30h12M14 32v14"/></svg></button>
+        </div>
+        <span class="dock-divider" aria-hidden="true"></span>
+        <button class="tool tool-icon" data-tool="erase" type="button" aria-label="橡皮"><svg viewBox="0 0 32 32"><path d="m7 21 10-13 8 6-9 12H9Z"/><path d="m14 12 8 7M8 26h17"/></svg></button>
+        <button class="tool tool-icon" data-tool="fill" type="button" aria-label="油漆桶"><svg viewBox="0 0 32 32"><path d="m7 15 9-9 10 10-9 9H8Z"/><path d="m12 6 10 10M25 22s3 3 0 6c-3-3 0-6 0-6Z"/></svg></button>
+        <button id="color-trigger" class="color-trigger" type="button" aria-label="选择颜色" aria-expanded="false"><span id="color-preview"></span></button>
+      </div>
+      <div id="color-panel" class="color-panel" hidden>
+        <div class="panel-heading"><strong>颜色与笔触</strong><button id="color-close" type="button" aria-label="关闭">×</button></div>
+        <div id="swatches" class="swatches" aria-label="常用颜色"></div>
+        <label class="custom-color"><span>自选颜色</span><input id="color" type="color" value="#33423b"></label>
+        <label class="slider-row"><span>粗细</span><input id="size" type="range" min="2" max="60" value="9"><output id="size-value">9</output></label>
+        <label class="slider-row"><span>透明度</span><input id="opacity" type="range" min="5" max="100" value="100"><output id="opacity-value">100%</output></label>
+      </div>
+      </div>
+    </nav>
+    <p class="note">你和对方画在同一张纸上。页面会自动接收对方的新笔画。</p>
+  </main>
+  <script src="../assets/sketch.js?v=18" defer></script>
+</body></html>

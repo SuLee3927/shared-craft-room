@@ -1,0 +1,30 @@
+.shelf-home{position:relative;margin-top:18px;overflow:hidden;border-radius:38px;background:#f7e8dc;box-shadow:0 18px 42px rgba(104,69,61,.18)}
+.shelf-scene{position:relative;width:100%;aspect-ratio:941/1672;overflow:hidden}
+.shelf-room-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.shelf-scene-title{position:absolute;z-index:4;left:7%;right:7%;top:3.1%;min-height:6.5%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 16px;border:1px solid rgba(255,255,255,.72);border-radius:24px;background:rgba(255,249,241,.84);color:#72524f;box-shadow:0 8px 18px rgba(107,68,58,.13);backdrop-filter:blur(8px)}
+.shelf-scene-title strong{font-size:clamp(18px,4vw,31px)}
+.shelf-scene-title span{font-size:clamp(11px,2.4vw,16px);color:#967971;text-align:right}
+#boards.shelf-slots{position:absolute;z-index:3;left:18.1%;top:14.2%;width:65.6%;height:48.3%;display:grid;grid-template-columns:47% 49%;grid-template-rows:21% 23% 23% 25%;column-gap:4%;row-gap:2.5%;padding:0!important;margin:0}
+.shelf-slot{position:relative;min-width:0;min-height:0;display:flex;align-items:center;justify-content:center}
+.shelf-slot.empty span{padding:4px 9px;border-radius:999px;background:rgba(255,250,240,.45);color:rgba(121,87,78,.48);font-size:clamp(9px,2vw,13px)}
+.shelf-slot .board-card{position:relative;width:88%;height:88%;min-height:0;padding:5px;border:0;border-radius:12px;background:rgba(255,251,244,.9);box-shadow:0 5px 10px rgba(89,59,49,.2);display:flex;align-items:center;justify-content:center;overflow:hidden;transform:rotate(-1deg)}
+.shelf-slot:nth-child(even) .board-card{transform:rotate(1deg)}
+.shelf-slot .board-card img{max-width:78%;max-height:68%;object-fit:contain;filter:drop-shadow(0 2px 2px rgba(80,52,45,.15))}
+.shelf-slot .board-card span{position:absolute;left:4px;right:4px;bottom:4px;padding:3px 5px;border-radius:8px;background:rgba(255,250,243,.9);color:#6f514d;line-height:1.08;text-align:left}
+.shelf-slot .board-card strong,.shelf-slot .board-card small{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.shelf-slot .board-card strong{font-size:clamp(9px,2.1vw,14px)}
+.shelf-slot .board-card small{margin-top:2px;font-size:clamp(7px,1.55vw,10px);color:#9a7e76}
+.shelf-slot .board-delete{position:absolute;z-index:4;right:1%;top:1%;width:23px;height:23px;padding:0;border:1px solid rgba(132,91,86,.18);border-radius:50%;background:rgba(255,249,242,.92);color:#a16d70;font-size:16px;line-height:20px;box-shadow:0 2px 6px rgba(91,61,53,.14)}
+#new-board-hotspot{position:absolute;z-index:4;left:61.5%;top:71.5%;width:26%;height:7%;padding:0;border:0;background:transparent;color:#805d54;box-shadow:none;transform:rotate(1deg)}
+#new-board-hotspot strong{display:block;font-size:clamp(10px,2.4vw,16px);font-weight:800;text-shadow:0 1px rgba(255,255,255,.7)}
+.shelf-more{position:absolute;left:50%;bottom:-32px;transform:translateX(-50%);white-space:nowrap;padding:4px 8px;border-radius:10px;background:#fff8;z-index:5;font-size:10px}
+.shelf-home>#create{position:fixed;z-index:80;left:50%;bottom:max(16px,env(safe-area-inset-bottom));width:min(560px,calc(100vw - 24px));max-height:min(82vh,720px);overflow:auto;transform:translateX(-50%);padding:16px;border:1px solid rgba(255,255,255,.85);border-radius:28px;background:rgba(255,249,242,.97);box-shadow:0 20px 60px rgba(75,47,43,.3);backdrop-filter:blur(14px)}
+.shelf-home>#create[hidden]{display:none!important}
+.create-head>div{display:grid;gap:2px}.create-head small{color:#aa8c83;font-size:12px}
+.create-modes{margin:12px 0!important;padding:0!important;border:0!important}.create-modes legend{margin-bottom:7px;color:#84645f;font-weight:800}
+.create-modes .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0;padding:0}
+.create-modes .modes button{min-width:0;min-height:78px;margin:0;padding:9px 5px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;border-radius:18px;box-shadow:none}
+.create-modes .modes button{position:relative}.create-modes .modes button.active{border-color:#a94763;background:#f7d4df;color:#653b47;box-shadow:inset 0 0 0 3px #c65f7d,0 4px 9px rgba(125,65,81,.18)}
+.create-modes .modes button.active:after{content:"✓ 已选";position:absolute;right:5px;top:5px;padding:2px 5px;border-radius:99px;background:#a94763;color:#fff;font:700 9px/1.3 system-ui}
+.create-modes .modes i{font-size:21px}.create-modes .modes strong{font-size:14px}.create-modes .modes small{font-size:10px;white-space:nowrap}
+@media(max-width:620px){body.beads-room main{width:100%;padding:0}.beads-room>main>header{margin:8px 10px 0}.shelf-home{margin:10px 0 0;border-radius:28px}.shelf-slot .board-delete{width:20px;height:20px;font-size:14px}.shelf-home>#create{border-radius:24px}.create-modes .modes button{display:flex;gap:2px}}

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "shared-craft-room"
+version = "0.1.0"
+description = "A cozy collaborative drawing and perler-bead room for humans and AI"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}
+authors = [{name = "SuLee3927 and contributors"}]
+dependencies = ["starlette>=0.46,<1", "uvicorn>=0.34,<1", "pillow>=10,<12"]
+
+[project.scripts]
+shared-craft-room = "shared_craft_room.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/shared_craft_room"]
+
+[tool.hatch.build]
+include = ["src/shared_craft_room/**/*.py", "src/shared_craft_room/static/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

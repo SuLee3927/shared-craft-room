@@ -1,0 +1,19 @@
+.toolbar button,.toolbar label{appearance:none;-webkit-appearance:none;-webkit-tap-highlight-color:transparent}.toolbar button:active{transform:translateY(1px)}
+@media(max-width:600px){
+  body .presence{position:static;margin:10px auto 0}
+  body .toolbar{position:fixed;z-index:30;right:0;bottom:max(84px,calc(env(safe-area-inset-bottom) + 70px));display:block;width:auto;margin:0}
+  .toolbar-toggle{display:grid;place-items:center;width:46px;height:58px;padding:0;border:1px solid #fff;border-right:0;border-radius:22px 0 0 22px;background:#fff4f6ed;color:#9a5f6b;box-shadow:0 7px 20px #69434b38;font:700 25px/1 system-ui}
+  .toolbar.open .toolbar-toggle{font-size:0}.toolbar.open .toolbar-toggle:after{content:'×';font-size:28px}
+  .toolbar-content{display:none;position:absolute;right:52px;bottom:0;width:min(356px,calc(100vw - 62px));padding:9px;border:1px solid #fff;border-radius:22px;background:#fff4f6ed;box-shadow:0 12px 32px #69434b40;backdrop-filter:blur(16px)}
+  .toolbar.open .toolbar-content{display:grid;gap:8px;justify-items:center}
+  .toolbar .paper-actions{position:static;order:2}.toolbar .tool-dock{order:1;max-width:100%;padding:5px 6px}
+  .toolbar .color-panel{right:0;left:auto;bottom:calc(100% + 9px);transform:none}
+  .sketchbook{width:100%;padding:10px 8px 28px}
+  header{padding:0 8px 10px}h1{font-size:2rem}
+  .paper-wrap{padding:20px 5px 8px 23px;border-radius:8px 14px 14px 8px}
+  .paper-wrap canvas{display:block;width:100%;height:auto;min-height:0;aspect-ratio:auto}
+  .spiral{top:28px;bottom:20px}.presence{right:11px;bottom:14px}
+  .toolbar{position:sticky;z-index:10;bottom:max(10px,env(safe-area-inset-bottom));margin-top:12px}
+  .tool-dock{gap:1px;padding:6px}.brush,.tool-icon{width:39px}.brush{height:54px}.color-trigger{width:38px}.dock-divider{margin:0}.paper-actions{right:4px}
+  .note{padding:10px 6px 76px;font-size:.82rem}
+}

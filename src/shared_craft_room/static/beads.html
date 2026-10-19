@@ -1,0 +1,44 @@
+<!doctype html><html lang="zh-CN"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>共同拼豆屋</title><link rel="preload" as="image" type="image/webp" href="../assets/bead-shelf-room-v2.webp" fetchpriority="high"><link rel="stylesheet" href="../assets/beads.css?v=14"><link rel="stylesheet" href="../assets/beads-v2.css?v=34"><link rel="stylesheet" href="../assets/beads-framer-fix.css?v=3"><link rel="stylesheet" href="../assets/craft-room.css?v=1"><link rel="stylesheet" href="../assets/bead-shelf-home.css?v=4">
+</head><body class="beads-room"><main>
+  <header><div><p>SHARED PERLER STUDIO</p><h1>共同拼豆屋</h1><span id="status">正在数豆子……</span></div><a class="gallery-link" href="../crafts/">‹ 回手作间</a></header>
+  <section id="home" class="shelf-home">
+    <div class="shelf-scene">
+      <img class="shelf-room-art" src="../assets/bead-shelf-room-v2.webp" fetchpriority="high" alt="装着八格豆板架子的可爱拼豆小屋">
+      <div class="shelf-scene-title"><strong>架子上的豆板</strong><span id="shelf-count">正在数豆板……</span></div>
+      <div id="boards" class="shelf-slots"></div>
+      <button type="button" id="new-board-hotspot" aria-label="拿一块新豆板"><strong>拿一块新豆板</strong></button>
+    </div>
+    <form id="create" hidden><div class="create-head"><div><strong>拿一块新豆板</strong><small>玩法、名字和尺寸都在这里</small></div><button type="button" id="create-cancel" aria-label="收起新建面板">×</button></div><fieldset class="create-modes"><legend>今天怎么拼？</legend><div class="modes"><button type="button" class="active" data-mode="together"><i>∞</i><strong>一起拼</strong><small>同一块板</small></button><button type="button" data-mode="separate"><i>▦</i><strong>各自拼</strong><small>各拼各的</small></button><button type="button" data-mode="gift"><i>♡</i><strong>偷偷送你</strong><small>揭晓前保密</small></button></div></fieldset><label>豆板名字<input id="title" maxlength="40" placeholder="比如：两只小猫"></label><fieldset><legend>豆板大小</legend><div class="size-options"><label><input type="radio" name="size" value="8"> 8 × 8</label><label><input type="radio" name="size" value="12"> 12 × 12</label><label><input type="radio" name="size" value="16" checked> 16 × 16</label><label><input type="radio" name="size" value="24"> 24 × 24</label><label><input type="radio" name="size" value="32"> 32 × 32</label><label><input type="radio" name="size" value="48"> 48 × 48</label><label><input type="radio" name="size" value="64"> 64 × 64</label></div></fieldset><button type="submit">拿一块空豆板</button></form>
+  </section>
+  <section id="studio" hidden>
+    <div class="studio-head"><button id="back">‹</button><div><h2 id="board-title"></h2><p id="board-meta"></p></div><button id="save" hidden>装扮成品</button></div>
+    <div class="tools"><div class="box-head"><strong id="box-title">我们的豆盒</strong><span id="box-count"></span></div><div id="bead-presence" aria-live="polite">等待对方进入豆板……</div><div id="palette"></div><p id="hint">左右滑豆盒选色，再点豆板上的小钉。</p></div>
+    <div class="workspace">
+      <aside id="reference"><span class="pin">●</span><label id="ref-empty">钉一张图纸<input id="ref-file" type="file" accept="image/*"></label><img id="ref-img" alt="参考图纸"><button id="ref-remove" hidden>取下</button></aside>
+      <div class="board-viewport" id="board-viewport"><div class="board-transform" id="board-transform"><canvas id="board" width="720" height="720" aria-label="拼豆板"></canvas></div><div id="live-activity" hidden aria-live="polite"></div><div class="board-view-controls"><button type="button" data-view="out" aria-label="缩小豆板">−</button><button type="button" data-view="fit">适应</button><button type="button" data-view="in" aria-label="放大豆板">＋</button></div></div>
+      <div class="actions"><button class="active" data-tool="place">拿豆放上去</button><button data-tool="take">取回一颗</button><button id="reveal" hidden>送给对方看</button></div>
+      <div id="ironing-paper"><span>熨烫纸</span></div>
+      <div id="iron" aria-hidden="true"><i></i><b>♨</b></div>
+    </div>
+    <section id="finishing"><div class="finish-title"><span>最后一步</span><strong id="craft-title">熨烫成品</strong><small id="craft-status">拼好以后，亲手把它变成真正的成品。</small></div><div class="finish-actions"><button id="cover">盖上熨烫纸</button><button id="uncover" hidden>先掀开纸</button><button id="heat" hidden>打开熨斗预热</button><button id="press-iron" hidden>按住熨烫</button><button id="lift" hidden>冷却好了，取下来</button><button id="exhibit" hidden>收入共同作品展</button></div><div id="heat-meter"><i></i></div></section>
+  </section>
+</main><dialog id="preview"><img alt="放大的参考图"><button>看完了</button></dialog><dialog id="refill-dialog"><div class="refill-bead"><i></i><div><strong></strong><span></span></div></div><p>这个豆盒空啦，拆一袋同色豆补进去？</p><div class="refill-actions"><button data-cancel>先不拆</button><button data-confirm>拆开 · +80</button></div></dialog>
+<section id="framer" hidden>
+  <div class="framer-head"><button id="framer-close" aria-label="关闭">‹</button><div><strong>成品装裱</strong><small>拖动位置 · 双指缩放旋转</small></div><button id="framer-export">保存分享图</button></div>
+  <div class="framer-stage"><canvas id="framer-canvas" width="900" height="900"></canvas></div>
+  <div class="framer-panel">
+    <div class="framer-tabs"><button class="active" data-framer-tab="background">背景</button><button data-framer-tab="sticker">装饰</button><button data-framer-tab="layer">成品</button></div>
+    <div class="framer-page" data-framer-page="background"><div class="preset-row"><button data-bg="cream">奶油纸</button><button data-bg="grid">格纹布</button><button data-bg="wood">浅木桌</button><button data-bg="scrap">手账纸</button><label class="upload-chip">上传背景<input id="framer-bg-file" type="file" accept="image/png,image/jpeg,image/webp" hidden></label></div></div>
+    <div class="framer-page" data-framer-page="sticker" hidden><div class="preset-row"><button data-sticker="🎀">🎀</button><button data-sticker="🌸">🌸</button><button data-sticker="✨">✨</button><button data-sticker="♡">♡</button><label class="upload-chip">上传贴纸<input id="framer-sticker-file" type="file" accept="image/png,image/jpeg,image/webp" hidden></label></div></div>
+    <div class="framer-page layer-page" data-framer-page="layer" hidden>
+      <div class="tool-group"><b>构图</b><div><button id="framer-piece">选中拼豆</button><button id="framer-rotate">旋转 90°</button><button id="framer-fit">自动装入</button><button id="framer-up">上移</button><button id="framer-down">下移</button><button id="framer-delete">删除装饰</button><button id="framer-reset">恢复</button></div></div>
+      <div class="tool-group"><b>修边</b><div><button id="framer-trim">逐颗修边</button><button id="framer-clean">保存透明成品</button></div></div>
+      <div class="tool-group appearance-group"><b>外观</b><div class="appearance-controls"><div class="appearance-row"><button id="framer-outline">描边</button><label class="outline-control">粗细<input id="framer-outline-size" type="range" min="2" max="24" value="8"></label><label class="outline-control">透明度<input id="framer-outline-opacity" type="range" min="5" max="100" value="42"></label></div><div class="appearance-row"><button id="framer-shadow">阴影</button><label class="outline-control color-control">颜色<input id="framer-shadow-color" type="color" value="#5b4343"></label><label class="outline-control">模糊<input id="framer-shadow-blur" type="range" min="0" max="35" value="14"></label><label class="outline-control">距离<input id="framer-shadow-distance" type="range" min="0" max="30" value="10"></label><label class="outline-control">深浅<input id="framer-shadow-opacity" type="range" min="5" max="90" value="35"></label></div></div></div>
+      <div class="tool-group"><b>袋装</b><div><button id="framer-shell">珠链透明袋</button></div></div>
+    </div>
+    <div class="framer-save-row"><p id="framer-hint">当前选中：拼豆成品</p><button id="framer-gallery" hidden>收入共同作品间</button></div>
+  </div>
+</section>
+<script src="../assets/beads.js?v=43" defer></script><script src="../assets/beads-framer.js?v=15" defer></script></body></html>

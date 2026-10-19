@@ -1,0 +1,65 @@
+/* Shared craft-room skin: one visual family for the bead studio and sketchbook. */
+:root{--cute-rose:#dc8292;--cute-rose-deep:#b85f73;--cute-mint:#9fc9b3;--cute-lilac:#b9a7d7;--cute-honey:#eab66d;--cute-ink:#584a4a;--cute-paper:#fffaf2}
+body.sketch-room .presence{position:static;right:auto;bottom:auto;margin:10px auto 0}
+body.beads-room,body.sketch-room{color:var(--cute-ink);background-color:#f7d9c4;background-image:linear-gradient(#fff7,#fff7),url("craft-workbench-portrait-v1.webp");background-size:cover;background-position:center top;background-attachment:fixed}
+body.beads-room main,body.sketch-room .sketchbook{position:relative}
+body.beads-room header,body.sketch-room header{isolation:isolate}
+.gallery-link{position:relative;z-index:2;padding:9px 14px;border:1px solid #fff;border-radius:999px;background:#fff9;color:#9d5d69;text-decoration:none;font:700 13px/1 system-ui;box-shadow:0 4px 10px #76434b1f}
+body.beads-room header:after,body.sketch-room header:after{content:"✦  ♡  ✿";position:absolute;z-index:-1;right:22px;bottom:11px;color:#d98a99;font:700 14px/1 system-ui;letter-spacing:.45em;opacity:.8}
+
+/* Bead room — candy boxes on a toy-like craft bench. */
+.beads-room header{border:2px solid #fff!important;background:linear-gradient(135deg,#fffaf7f5,#ffe8ecf2 58%,#eaf7eff0)!important;box-shadow:0 7px 0 #d9a6a6,0 18px 36px #a1676730!important}
+.beads-room header:before{background:repeating-linear-gradient(45deg,#f3a5b4 0 8px,#fff3 8px 12px)!important;border-radius:3px}
+.beads-room header h1{color:#8d5260;text-shadow:0 2px #fff}
+.beads-room header p{color:#bc6c7e}.beads-room header b{color:#dc8292!important}
+.beads-room .intro,.beads-room .old{border:2px solid #fff!important;background:linear-gradient(145deg,#fffdf8f5,#fff0eaf0)!important;box-shadow:0 6px 0 #e5b9ad,0 16px 28px #99685c25!important}
+.beads-room .intro{position:relative;overflow:hidden;padding-left:74px}
+.beads-room .intro:before{content:"🧸";position:absolute;left:20px;top:50%;font-size:34px;transform:translateY(-50%) rotate(-7deg);filter:drop-shadow(0 3px 2px #a86a6a20)}
+.beads-room .modes button{overflow:hidden;border:2px solid #fff!important;border-radius:26px!important;background:linear-gradient(145deg,#fffdfb,#ffeef2)!important;box-shadow:0 6px 0 #dfa6b0,0 14px 25px #94606b25!important}
+.beads-room .modes button:nth-child(2){background:linear-gradient(145deg,#fffdfb,#edf8f1)!important;box-shadow:0 6px 0 #afd2c0,0 14px 25px #587c6820!important}
+.beads-room .modes button:nth-child(3){background:linear-gradient(145deg,#fffdfb,#f1edfb)!important;box-shadow:0 6px 0 #c3b5dc,0 14px 25px #69578320!important}
+.beads-room .modes i{color:#c56d82;text-shadow:0 2px #fff}.beads-room .modes strong{color:#76515b}
+.beads-room #create{border:2px dashed #dc9aaa;background:#fffaf5ed;box-shadow:0 10px 24px #9d665d20}
+.beads-room .size-options label{padding:8px 4px;border-radius:12px;background:#fff;border:1px solid #efd8d4;text-align:center;font-size:13px}.beads-room .size-options input{accent-color:var(--cute-rose)}
+.beads-room #boards{gap:14px}.beads-room .board-card{border:2px solid #fff!important;border-radius:19px!important;background:linear-gradient(145deg,#fffdf8,#fff0e7)!important;box-shadow:0 5px 0 #d4ad93,0 12px 22px #8c604325!important}
+.beads-room .studio-head{border:2px solid #fff;background:linear-gradient(145deg,#fffaf7f5,#ffeceff0)!important;box-shadow:0 6px 0 #d4a1a9,0 15px 30px #88596528!important}
+.beads-room .studio-head #save{background:linear-gradient(145deg,#ef96a5,#c9667b)!important}
+.beads-room .tools{border:2px solid #fff!important;background:linear-gradient(155deg,#fffdf8f2,#fff0e5ee)!important;box-shadow:0 7px 0 #d8a889,0 18px 30px #8055382b!important}
+.beads-room .box-head strong:before{content:"✿ ";color:#d47788}
+.beads-room .swatch-wrap{border:2px solid #fff!important;border-radius:16px!important;box-shadow:0 4px 0 color-mix(in srgb,var(--bead) 22%,#c9aa96),0 8px 13px #76533e20!important}
+.beads-room .workspace:before{border:4px solid #fff4!important;background:linear-gradient(145deg,#d49b70,#a76c49)!important;box-shadow:0 8px 0 #805036,0 24px 44px #6f402f42,inset 0 3px #fff7!important}
+.beads-room .board-viewport{border:7px solid #ffeedd;border-radius:28px;box-shadow:0 7px 0 #83553c,0 18px 34px #573c273c}
+.beads-room .board-view-controls{border:2px solid #fff;background:#fff7f0ed}.beads-room .board-view-controls button{color:#9d5766}
+.beads-room .workspace .actions{border:2px solid #fff!important;background:#fff8f3f2!important;box-shadow:0 5px 0 #cb9a82,0 11px 20px #65402c2c!important}
+.beads-room .workspace .actions button.active{background:linear-gradient(145deg,#e78d9e,#bd6077)!important}
+.beads-room #finishing{border:2px solid #fff!important;background:linear-gradient(145deg,#fffaf4f2,#f5e8f8ed)!important;box-shadow:0 6px 0 #c5afd8,0 18px 30px #69547528!important}
+.beads-room .finish-title>span{background:linear-gradient(#d98a99,#b75c70)!important}.beads-room .finish-title>span:after{content:"♡";display:block;margin-top:8px}
+
+/* Sketch room — a cheerful ring-bound picture book with a pastel pencil case. */
+.sketch-room .sketchbook{width:min(1140px,calc(100% - 24px))}
+.sketch-room header{position:relative;margin-bottom:18px;padding:18px 25px!important;border:2px solid #fff;border-radius:28px;background:linear-gradient(135deg,#fffaf6f3,#fff0f4ed 58%,#eaf7f0e8);box-shadow:0 7px 0 #d7a1aa,0 18px 38px #96636a2b}
+.sketch-room header:before{content:"";position:absolute;left:28px;top:-9px;width:86px;height:22px;border-radius:3px;background:repeating-linear-gradient(45deg,#ffd4a0aa 0 9px,#fff5 9px 14px);transform:rotate(-3deg)}
+.sketch-room h1{color:#895363;text-shadow:0 2px #fff}.sketch-room .eyebrow{color:#bd7181}.sketch-room .clip{color:#e19a63}
+.sketch-room .paper-wrap{padding:34px 32px 30px 58px;border:3px solid #fff;border-radius:18px 34px 34px 18px;background:linear-gradient(145deg,#f7c9d1,#eeb4c1);box-shadow:0 9px 0 #bd7d8a,0 28px 58px #875b6238}
+.sketch-room .paper-wrap:before{inset:14px -8px -11px 12px;border:2px solid #fff7;border-radius:18px 34px 34px 18px;background:#a8cdb9}
+.sketch-room .paper-wrap:after{content:"♡";position:absolute;right:17px;top:12px;color:#fff;font-size:22px;transform:rotate(12deg)}
+.sketch-room .spiral{left:18px;top:42px;bottom:40px;width:25px;background:repeating-linear-gradient(#846b72 0 4px,transparent 4px 40px)}
+.sketch-room canvas{border:2px solid #eaded3;border-radius:5px;background-color:#fffdf8;background-image:radial-gradient(#e7a9b333 1px,transparent 1px);background-size:22px 22px;box-shadow:inset 0 0 35px #a88d6518,0 5px 0 #d1bda8,0 12px 25px #6a45452a}
+.sketch-room .presence{right:42px;bottom:39px;border:2px solid #fff;background:#fff4f6ed;color:#9a5f6b;box-shadow:0 3px 8px #7f555525}
+.sketch-room .tool-dock{padding:10px 13px 9px;border:2px solid #fff;border-radius:26px;background:linear-gradient(145deg,#fffaf8f2,#fff0eaf0);box-shadow:0 6px 0 #d6a092,0 16px 32px #845b4a30}
+.sketch-room .brush,.sketch-room .tool-icon,.sketch-room .color-trigger{border-radius:16px}.sketch-room .brush.active,.sketch-room .tool-icon.active{color:#8b5965;background:#f7cbd4;box-shadow:inset 0 0 0 2px #fff}
+.sketch-room .brush:nth-child(2) .pen-body{fill:#f4d58d}.sketch-room .brush:nth-child(3) .pen-body{fill:#b9d9c7}.sketch-room .brush:nth-child(4) .pen-body{fill:#cbbbe3}
+.sketch-room .action-icon{border:2px solid #fff;background:#fff4f5;box-shadow:0 3px 0 #d3a0a7}.sketch-room .color-panel{border:2px solid #fff;background:linear-gradient(145deg,#fffaf8f7,#fff0f3f4);box-shadow:0 7px 0 #d5a0aa,0 22px 55px #76505a38}
+.sketch-room .note{color:#8f6570}.sketch-room .note:before{content:"✦ ";color:#d89068}.sketch-room .note:after{content:" ✦";color:#8ebda5}
+
+@media(max-width:620px){
+  body.beads-room,body.sketch-room{background-size:auto 100vh;background-position:center top}
+  body.beads-room header:after,body.sketch-room header:after{right:10px;bottom:8px;font-size:10px}
+  .beads-room .intro{padding:17px 14px 17px 58px}.beads-room .intro:before{left:13px;font-size:29px}.beads-room .modes{gap:14px}.beads-room .size-options{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .beads-room .board-viewport{border-width:5px;border-radius:21px}.beads-room .workspace:before{border-width:3px!important}
+  .sketch-room .sketchbook{width:100%}.sketch-room header{margin:0 3px 14px;padding:13px 17px!important}.sketch-room header:before{left:20px;width:65px;height:17px}
+  .sketch-room .paper-wrap{padding:24px 7px 12px 29px;border-width:2px;border-radius:12px 22px 22px 12px}.sketch-room .paper-wrap:after{right:7px;top:3px;font-size:16px}.sketch-room .spiral{left:7px;top:32px;bottom:25px;width:17px}.sketch-room .presence{right:13px;bottom:18px}
+  .sketch-room .tool-dock{padding:7px 8px 7px;border-radius:22px}.sketch-room .paper-actions{right:5px}
+}
+
+@media(prefers-reduced-motion:reduce){.beads-room *,.sketch-room *{scroll-behavior:auto!important}}
