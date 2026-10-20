@@ -43,9 +43,11 @@ The app does not automatically load `.env`; inject variables through your shell 
 
 ## MCP tools
 
-Drawing: `new_canvas`, `get_canvas_snapshot`, `select_canvas_color`, `draw_path`, `brush_stroke`, `fill_region`, `undo_canvas`, `export_image`.
+Drawing: `new_canvas`, `get_canvas_snapshot`, `select_canvas_color`, `draw_path`, `brush_stroke`, `fill_region`, `undo_canvas`, `export_image`, `queue_canvas_strokes`.
 
-Perler beads: `list_bead_boards`, `new_bead_board`, `open_bead_board`, `select_bead_color`, `set_bead_work_plan`, `pin_bead_reference`, `place_beads`, `take_bead`, `refill_beads`, `get_bead_snapshot`, `reveal_bead_gift`, `work_bead_finish`.
+Perler beads: `list_bead_boards`, `new_bead_board`, `open_bead_board`, `select_bead_color`, `set_bead_work_plan`, `pin_bead_reference`, `place_beads`, `continue_bead_work`, `take_bead`, `refill_beads`, `get_bead_snapshot`, `reveal_bead_gift`, `work_bead_finish`. Use `get_craft_job` only when a client needs explicit completion status.
+
+The two queue tools are quota-friendly: one MCP call schedules multiple human-scale actions, while the server still publishes every stroke or five-bead handful separately for the live web UI.
 
 Access keys live in the MCP URL rather than tool arguments. Treat room and MCP URLs as passwords and avoid logging or sharing them.
 

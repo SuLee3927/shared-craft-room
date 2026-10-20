@@ -18,6 +18,7 @@ from .beads import BeadBoards
 from .canvas import SharedCanvas
 from .gallery import CraftGallery
 from .identity import IdentityStore
+from .jobs import CraftJobs
 
 
 DATA_DIR = Path(os.environ.get("CRAFT_DATA_DIR", "data"))
@@ -29,17 +30,19 @@ identities = IdentityStore(DATA_DIR / "participants.json")
 canvas = SharedCanvas(DATA_DIR / "canvas.json")
 beads = BeadBoards(DATA_DIR / "beads.json")
 gallery = CraftGallery(DATA_DIR / "gallery.json")
+jobs = CraftJobs(canvas, beads)
 logger = logging.getLogger("shared_craft_room")
 
 MCP_INSTRUCTIONS = (
     "This is a shared hands-on craft room. Before drawing, inspect the canvas snapshot and "
-    "select a color. Draw with several natural pen-down strokes rather than a single computed "
-    "shape. For perler beads, select a color before each run and place only 1 to 5 beads per "
-    "call so the other participant can watch the work happen."
+    "select a color. Prefer queue_canvas_strokes for several natural pen-down strokes so they "
+    "appear one by one with fewer tool calls. For perler beads, save a work plan, then prefer "
+    "continue_bead_work for several live five-bead handfuls without increasing handful size."
 )
 
 POINT = {"type": "object", "properties": {"x": {"type": "number"}, "y": {"type": "number"}}, "required": ["x", "y"], "additionalProperties": False}
 BEAD = {"type": "object", "properties": {"x": {"type": "integer", "minimum": 0}, "y": {"type": "integer", "minimum": 0}, "color": {"type": "string"}}, "required": ["x", "y", "color"], "additionalProperties": False}
+STROKE = {"type": "object", "properties": {"points": {"type": "array", "minItems": 1, "maxItems": 14, "items": POINT}, "color": {"type": "string"}, "width": {"type": "number", "minimum": 1, "maximum": 100}, "opacity": {"type": "number", "minimum": 0.05, "maximum": 1}, "mode": {"type": "string", "enum": ["draw", "erase"]}, "brush": {"type": "string", "enum": ["pencil", "pen", "marker", "brush"]}}, "required": ["points"], "additionalProperties": False}
 
 TOOLS = [
     {"name": "new_canvas", "description": "Start a fresh shared portrait or landscape drawing page.", "inputSchema": {"type": "object", "properties": {"background": {"type": "string", "default": "#fffdf7"}, "orientation": {"type": "string", "enum": ["portrait", "landscape"], "default": "portrait"}}, "additionalProperties": False}},
@@ -50,6 +53,7 @@ TOOLS = [
     {"name": "fill_region", "description": "Fill one closed drawing region at a point.", "inputSchema": {"type": "object", "properties": {"x": {"type": "number"}, "y": {"type": "number"}, "color": {"type": "string"}}, "required": ["x", "y", "color"], "additionalProperties": False}},
     {"name": "undo_canvas", "description": "Undo your own most recent stroke.", "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False}},
     {"name": "export_image", "description": "Return the current shared drawing as PNG.", "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False}, "annotations": {"readOnlyHint": True}},
+    {"name": "queue_canvas_strokes", "description": "Queue 1 to 12 distinct natural strokes in one call. The server draws them one by one so the other participant sees live progress while using fewer tool calls.", "inputSchema": {"type": "object", "properties": {"strokes": {"type": "array", "minItems": 1, "maxItems": 12, "items": STROKE}, "interval_ms": {"type": "integer", "minimum": 180, "maximum": 1200, "default": 360}}, "required": ["strokes"], "additionalProperties": False}},
     {"name": "list_bead_boards", "description": "List bead boards visible to you.", "inputSchema": {"type": "object", "properties": {}, "additionalProperties": False}, "annotations": {"readOnlyHint": True}},
     {"name": "new_bead_board", "description": "Take a new empty pegboard in together, separate, or gift mode.", "inputSchema": {"type": "object", "properties": {"title": {"type": "string", "maxLength": 40}, "mode": {"type": "string", "enum": ["together", "separate", "gift"]}, "size": {"type": "integer", "enum": [8, 12, 16, 24, 32, 48, 64]}}, "required": ["title", "mode", "size"], "additionalProperties": False}},
     {"name": "open_bead_board", "description": "Inspect a bead board, its coordinates, inventories, and unfinished plan.", "inputSchema": {"type": "object", "properties": {"board_id": {"type": "string"}}, "required": ["board_id"], "additionalProperties": False}, "annotations": {"readOnlyHint": True}},
@@ -62,6 +66,8 @@ TOOLS = [
     {"name": "get_bead_snapshot", "description": "View the current bead board as PNG.", "inputSchema": {"type": "object", "properties": {"board_id": {"type": "string"}}, "required": ["board_id"], "additionalProperties": False}, "annotations": {"readOnlyHint": True}},
     {"name": "reveal_bead_gift", "description": "Reveal a gift board to the other participant.", "inputSchema": {"type": "object", "properties": {"board_id": {"type": "string"}}, "required": ["board_id"], "additionalProperties": False}},
     {"name": "work_bead_finish", "description": "Perform one finishing step: cover, uncover, heat, start_iron, finish_iron, or lift.", "inputSchema": {"type": "object", "properties": {"board_id": {"type": "string"}, "action": {"type": "string", "enum": ["cover", "uncover", "heat", "start_iron", "finish_iron", "lift"]}}, "required": ["board_id", "action"], "additionalProperties": False}},
+    {"name": "continue_bead_work", "description": "Continue the saved bead work plan for 1 to 8 five-bead handfuls in the background. Each handful remains separately visible on the live board, but the continuation uses one tool call.", "inputSchema": {"type": "object", "properties": {"board_id": {"type": "string"}, "handfuls": {"type": "integer", "minimum": 1, "maximum": 8, "default": 4}, "interval_ms": {"type": "integer", "minimum": 250, "maximum": 1500, "default": 520}}, "required": ["board_id"], "additionalProperties": False}},
+    {"name": "get_craft_job", "description": "Check whether a queued drawing or bead continuation has completed.", "inputSchema": {"type": "object", "properties": {"job_id": {"type": "string"}}, "required": ["job_id"], "additionalProperties": False}, "annotations": {"readOnlyHint": True}},
 ]
 
 
@@ -266,6 +272,7 @@ def call_tool(actor: str, name: str, args: dict[str, Any]) -> dict[str, Any]:
         "brush_stroke": lambda **kw: canvas.draw_path(actor, naturalize=True, **kw),
         "fill_region": lambda x, y, color: canvas.draw_path(actor, [{"x": x, "y": y}], color=color, mode="fill"),
         "undo_canvas": lambda: canvas.undo(actor), "list_bead_boards": lambda: {"boards": beads.list_boards(actor)},
+        "queue_canvas_strokes": lambda strokes, interval_ms=360: jobs.queue_canvas(actor, strokes, interval_ms),
         "new_bead_board": lambda **kw: beads.create(actor, **kw), "open_bead_board": lambda board_id: beads.get(actor, board_id),
         "select_bead_color": lambda board_id, color: beads.select_color(actor, board_id, color),
         "set_bead_work_plan": lambda board_id, beads, title="": globals()["beads"].set_work_plan(actor, board_id, beads, title),
@@ -274,6 +281,8 @@ def call_tool(actor: str, name: str, args: dict[str, Any]) -> dict[str, Any]:
         "take_bead": lambda board_id, x, y: beads.take(actor, board_id, x, y), "refill_beads": lambda board_id, color: beads.refill(actor, board_id, color),
         "get_bead_snapshot": lambda board_id: {"board_id": board_id, "_image_bytes": beads.png_bytes(actor, board_id)},
         "reveal_bead_gift": lambda board_id: beads.reveal(actor, board_id), "work_bead_finish": lambda board_id, action: beads.craft(actor, board_id, action),
+        "continue_bead_work": lambda board_id, handfuls=4, interval_ms=520: jobs.continue_bead_plan(actor, board_id, handfuls, interval_ms),
+        "get_craft_job": lambda job_id: jobs.status(actor, job_id),
     }
     if name not in dispatch: raise KeyError(name)
     return dispatch[name](**args)
