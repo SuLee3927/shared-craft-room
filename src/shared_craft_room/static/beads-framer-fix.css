@@ -45,6 +45,11 @@
 .layer-page .outline-control input[type="color"] { width: 42px; }
 .layer-page button { flex: 0 1 auto; }
 body:has(#framer:not([hidden])) { overflow: hidden !important; }
+.framer-page[data-framer-page="sticker"] button[data-sticker-src]{width:52px;min-width:52px;height:48px;padding:4px}
+.framer-page[data-framer-page="sticker"] button[data-sticker-src] img{display:block;width:100%;height:100%;object-fit:contain}
+.text-chip{display:flex;align-items:center;gap:5px;min-width:210px;padding:3px 4px 3px 9px;border:1px solid #b99a8066;border-radius:12px;background:#fffaf4}
+.text-chip input{width:105px;min-width:0;border:0;background:transparent;color:#66554b;outline:0;font:13px system-ui}
+.text-chip button{min-height:32px!important;padding:5px 9px!important}
 @media (max-width: 620px) {
   .layer-page { max-height: 29vh; }
   .layer-page .tool-group { grid-template-columns: 34px minmax(0, 1fr); }

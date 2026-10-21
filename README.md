@@ -45,7 +45,9 @@ The app does not automatically load `.env`; inject variables through your shell 
 
 Drawing: `new_canvas`, `get_canvas_snapshot`, `select_canvas_color`, `draw_path`, `brush_stroke`, `fill_region`, `undo_canvas`, `export_image`, `queue_canvas_strokes`.
 
-Perler beads: `list_bead_boards`, `new_bead_board`, `open_bead_board`, `select_bead_color`, `set_bead_work_plan`, `pin_bead_reference`, `place_beads`, `continue_bead_work`, `take_bead`, `refill_beads`, `get_bead_snapshot`, `reveal_bead_gift`, `work_bead_finish`. Use `get_craft_job` only when a client needs explicit completion status.
+Perler beads: `list_bead_boards`, `new_bead_board`, `open_bead_board`, `select_bead_color`, `set_bead_work_plan`, `pin_bead_reference`, `upload_bead_reference`, `place_beads`, `continue_bead_work`, `take_bead`, `refill_beads`, `get_bead_snapshot`, `reveal_bead_gift`, `work_bead_finish`. Use `get_craft_job` only when a client needs explicit completion status.
+
+`pin_bead_reference` accepts bead coordinates, generates a standard pattern image, and also saves the resumable work plan. `upload_bead_reference` accepts an existing PNG/JPEG/WebP data URL under 1 MB and pins only that image; it does not infer bead coordinates from the picture. Human participants can upload the same formats from the reference-note control in the web UI.
 
 The two queue tools are quota-friendly: one MCP call schedules multiple human-scale actions, while the server still publishes every stroke or five-bead handful separately for the live web UI.
 
