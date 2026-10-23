@@ -229,6 +229,9 @@ class BeadBoards:
 
     def touch(self, actor: str, board_id: str, action: str = "viewing", color: str | None = None) -> None:
         with self.lock:
+            previous = self.presence.get((board_id, actor))
+            if action == "viewing" and previous and previous.get("action") != "viewing" and time.monotonic() - previous["seen"] < 20:
+                return
             self.presence[(board_id, actor)] = {"action": action, "color": color, "seen": time.monotonic()}
 
     def presence_for(self, actor: str, board_id: str) -> list[dict[str, Any]]:
@@ -346,7 +349,8 @@ class BeadBoards:
                 session["updated_at"] = now()
                 if not session["remaining"]:
                     board["work_sessions"].pop(actor, None)
-            self._record_activity(board, actor, "place", count=len(clean), color=clean[-1][1])
+            colors = list(dict.fromkeys(color for _, color, _, _ in clean))
+            self._record_activity(board, actor, "place", count=len(clean), color=clean[-1][1], colors=colors)
             board["revision"] += 1
             board["updated_at"] = now()
             data["revision"] = int(data.get("revision", 0)) + 1

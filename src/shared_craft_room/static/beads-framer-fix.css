@@ -9,6 +9,35 @@
   overflow-y: auto !important;
   overscroll-behavior: contain;
 }
+.grouped-page {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  grid-auto-rows: max-content;
+  align-items: stretch;
+  gap: 7px;
+  max-height: min(32vh, 260px);
+  padding: 2px;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+}
+.grouped-page[hidden] { display: none !important; }
+.grouped-page .tool-group {
+  width: 100%;
+  min-width: 0;
+  height: max-content;
+  grid-template-columns: 38px minmax(0, 1fr);
+}
+.grouped-page .tool-group > b {
+  writing-mode: horizontal-tb;
+  text-align: center;
+}
+.grouped-page .tool-group > div {
+  display: flex;
+  flex-wrap: wrap;
+  min-width: 0;
+  gap: 6px;
+}
 .layer-page[hidden] { display: none !important; }
 .layer-page .tool-group {
   width: 100%;
@@ -51,8 +80,10 @@ body:has(#framer:not([hidden])) { overflow: hidden !important; }
 .text-chip input{width:105px;min-width:0;border:0;background:transparent;color:#66554b;outline:0;font:13px system-ui}
 .text-chip button{min-height:32px!important;padding:5px 9px!important}
 @media (max-width: 620px) {
-  .layer-page { max-height: 29vh; }
-  .layer-page .tool-group { grid-template-columns: 34px minmax(0, 1fr); }
+  .layer-page,
+  .grouped-page { max-height: 29vh; }
+  .layer-page .tool-group,
+  .grouped-page .tool-group { grid-template-columns: 34px minmax(0, 1fr); }
   .layer-page .appearance-row,
   .layer-page .appearance-row:last-child { grid-template-columns: minmax(0, 1fr); }
   .layer-page .appearance-row > button { grid-row: auto; width: 100%; }

@@ -53,7 +53,7 @@
   height: 100%;
   margin: 0;
   object-fit: contain;
-  background: #fffdf7;
+  background: transparent;
   transform: none;
 }
 .wall .frame-slot,.wall #charms,.wall .stand-slot{opacity:0;transition:opacity .22s ease}
